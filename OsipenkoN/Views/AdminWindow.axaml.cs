@@ -20,6 +20,7 @@ public partial class AdminWindow : Window
             string password = passbox.Text;
             string role = Rolebox.Text;
 
+            if (bd.Users.FirstOrDefault(a=> a.Name == login && a.Pasword == password) == null)
             bd.Add(
                 new User
                 {
@@ -56,12 +57,10 @@ public partial class AdminWindow : Window
         using (var bd = new bdBetka())
         {
             var razban = bd.Users.FirstOrDefault(a => a.Name == loginbox.Text && a.Pasword == passbox.Text);
-            bd.Users.Update(new User { 
-                Name = loginbox.Text,
-                Pasword = passbox.Text,
-                Role = Rolebox.Text,
-                Ban = false
-            });
+            if (razban != null)
+            {
+                razban.Ban = false;
+            }
             bd.SaveChanges();
         }
     }
