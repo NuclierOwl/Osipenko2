@@ -8,5 +8,11 @@
         x:Class="OsipenkoN.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="OsipenkoN">
-        <views:MainView />
+    <StackPanel>
+		<DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+			<TextBox Name="loginBox" Watermark="Логин"/>
+            <TextBox Name="PassBox" Watermark="Пароль"/>
+            <Button Name="enter" Click="Button_Click" Content="Войти"/>
+        </DockPanel>
+    </StackPanel>
 </Window>
