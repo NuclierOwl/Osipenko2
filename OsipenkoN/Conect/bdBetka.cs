@@ -78,10 +78,11 @@ public partial class bdBetka : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("users");
+            entity.HasKey(e => e.Id).HasName("users_pk");
 
+            entity.ToTable("users");
+
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name).HasColumnType("character varying");
             entity.Property(e => e.Pasword)
                 .HasColumnType("character varying")

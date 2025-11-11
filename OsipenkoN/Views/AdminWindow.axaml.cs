@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using OsipenkoN.Conect;
 using OsipenkoN.Date;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace OsipenkoN;
@@ -21,7 +20,7 @@ public partial class AdminWindow : Window
             string password = passbox.Text;
             string role = Rolebox.Text;
 
-            if (login != null && password != null && (role == "Администратор" || role == "Пользователь"))
+            if (bd.Users.FirstOrDefault(a => a.Name == login && a.Pasword == password) == null)
             {
                 bd.Add(
                     new User
@@ -43,6 +42,13 @@ public partial class AdminWindow : Window
         using (var bd = new bdBetka())
         {
             var users = bd.Users.FirstOrDefault(a => a.Name == loginbox.Text);
+
+            if (users != null)
+            {
+                users.Name = loginbox.Text;
+                users.Pasword = passbox.Text;
+                users.Role = Rolebox.Text;
+            }
         }
     }
 }

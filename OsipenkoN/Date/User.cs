@@ -10,4 +10,6 @@ public partial class User
     public string? Pasword { get; set; }
 
     public string? Role { get; set; }
+
+    public int Id { get; set; }
 }
