@@ -20,17 +20,15 @@ public partial class AdminWindow : Window
             string password = passbox.Text;
             string role = Rolebox.Text;
 
-            if (bd.Users.FirstOrDefault(a => a.Name == login && a.Pasword == password) == null)
-            {
-                bd.Add(
-                    new User
-                    {
-                        Name = login,
-                        Pasword = password,
-                        Role = role,
+            bd.Add(
+                new User
+                {
+                    Name = login,
+                    Pasword = password,
+                    Role = role,
 
-                    });
-            }
+                });
+            bd.SaveChanges();
         }
     }
 
@@ -49,6 +47,22 @@ public partial class AdminWindow : Window
                 users.Pasword = passbox.Text;
                 users.Role = Rolebox.Text;
             }
+            bd.SaveChanges();
+        }
+    }
+
+    private void Unban_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        using (var bd = new bdBetka())
+        {
+            var razban = bd.Users.FirstOrDefault(a => a.Name == loginbox.Text && a.Pasword == passbox.Text);
+            bd.Users.Update(new User { 
+                Name = loginbox.Text,
+                Pasword = passbox.Text,
+                Role = Rolebox.Text,
+                Ban = false
+            });
+            bd.SaveChanges();
         }
     }
 }

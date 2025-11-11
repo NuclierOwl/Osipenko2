@@ -25,6 +25,12 @@ public partial class MainWindow : Window
             {
                 Window next = new Window();
 
+                if (user.Ban == true)
+                {
+                    loginBox.Text = "Ты в Бане!";
+                    PassBox.Text = "Пиши админу";
+                    return;
+                }
                 switch (user.Role)
                 {
                     case ("Администратор"):
